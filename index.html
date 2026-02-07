@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will you be my Valentine?</title>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <style>
+        body {
+            background-color: #ffe6e6;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            max-width: 90%;
+            width: 400px;
+            position: relative;
+        }
+
+        h1 {
+            color: #d63384;
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+        .main-image {
+            width: 100%;
+            max-height: 300px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            object-fit: cover;
+        }
+
+        .buttons {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            padding: 15px 30px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.2s;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        #yesBtn {
+            background-color: #28a745;
+            color: white;
+            font-weight: bold;
+            z-index: 10;
+        }
+        
+        #noBtn {
+            background-color: #dc3545;
+            color: white;
+            position: relative;
+            transition: all 0.1s ease;
+        }
+
+        #success-message {
+            display: none;
+            color: #d63384;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container" id="card">
+        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbXNvdW1wZnZ4YmJoMWg5emx0Z3I0Z3I0Z3I0Z3I0Z3I0Z3I0ZCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/OPU6wzx8JrHna/giphy.gif" id="valentineImage" class="main-image" alt="Funny GIF">
+        
+        <h1 id="question">Will u be my valentine? 🥺</h1>
+
+        <div class="buttons">
+            <button id="yesBtn" onclick="handleYesClick()">YES</button>
+            <button id="noBtn" onmouseover="moveButton()" onclick="moveButton()">NO</button>
+        </div>
+    </div>
+
+    <div class="container" id="success-message">
+        <img src="https://media.giphy.com/media/T86i6yDyOYz7J6dPhf/giphy.gif" class="main-image">
+        <h1>YAAAAY! ❤️</h1>
+        <p>Verifică-ți emailul! Ți-am trimis detaliile! 😘</p>
+    </div>
+
+    <script>
+        // --- CONFIGURARE EMAILJS (Completează AICI) ---
+        const PUBLIC_KEY = "EvWMDMFwdQHN8Ugc5"; // Ex: "user_Xyz123..."
+        const SERVICE_ID = "service_dbbeojs";       // Ex: "service_gmail"
+        const TEMPLATE_ID = "template_xgq80ry";     // Ex: "template_abc"
+        
+        // AICI PUI EMAILUL EI/LUI (Cui vrei sa ii ajunga mailul)
+        const EMAIL_DESTINATAR = "alin2004andres@gmail.com"; 
+        // ----------------------------------------------
+
+        // Inițializare EmailJS
+        (function(){
+            emailjs.init(PUBLIC_KEY);
+        })();
+
+        let hoverCount = 0;
+        const noBtn = document.getElementById('noBtn');
+        const image = document.getElementById('valentineImage');
+        const question = document.getElementById('question');
+
+        const stopImageSrc = "https://media.giphy.com/media/11tTNkNy1SdXGg/giphy.gif"; 
+
+        function moveButton() {
+            hoverCount++;
+            if (hoverCount === 4) {
+                image.src = stopImageSrc;
+                question.innerText = "Stop it! Just say YES! 😠";
+                noBtn.style.display = "none";
+                return;
+            }
+            const maxX = window.innerWidth - noBtn.offsetWidth - 20;
+            const maxY = window.innerHeight - noBtn.offsetHeight - 20;
+            const x = Math.random() * maxX;
+            const y = Math.random() * maxY;
+            noBtn.style.position = 'fixed';
+            noBtn.style.left = `${x}px`;
+            noBtn.style.top = `${y}px`;
+        }
+
+        function handleYesClick() {
+            // 1. Arătăm mesajul de succes imediat (ca să nu aștepte)
+            document.getElementById('card').style.display = 'none';
+            document.getElementById('success-message').style.display = 'block';
+
+            // 2. Trimitem emailul în fundal
+            var templateParams = {
+                to_email: EMAIL_DESTINATAR, // Mailul setat mai sus
+                message: "A zis DA!" // Mesaj tehnic (poți ignora, contează ce ai pus în Template pe site)
+            };
+
+            emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams)
+                .then(function(response) {
+                   console.log('SUCCESS!', response.status, response.text);
+                }, function(error) {
+                   console.log('FAILED...', error);
+                   alert("Nu s-a putut trimite mailul, dar Răspunsul rămâne DA! ❤️");
+                });
+        }
+    </script>
+</body>
+</html>
