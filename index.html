@@ -83,7 +83,7 @@
 <body>
 
     <div class="container" id="card">
-        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbXNvdW1wZnZ4YmJoMWg5emx0Z3I0Z3I0Z3I0Z3I0Z3I0Z3I0ZCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/OPU6wzx8JrHna/giphy.gif" id="valentineImage" class="main-image" alt="Funny GIF">
+        <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExdnlxZHVid3o5anNzNHJwMDR1YXg3NmsyN3BnbzdrMGE4eXdzNTR5dyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/t4lW2qMo119cHlfnNY/giphy.gif" id="valentineImage" class="main-image" alt="Funny GIF">
         
         <h1 id="question">Will u be my valentine? 🥺</h1>
 
@@ -94,22 +94,17 @@
     </div>
 
     <div class="container" id="success-message">
-        <img src="https://media.giphy.com/media/T86i6yDyOYz7J6dPhf/giphy.gif" class="main-image">
-        <h1>YAAAAY! ❤️</h1>
-        <p>Verifică-ți emailul! Ți-am trimis detaliile! 😘</p>
+        <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExOWJqN2VrZDQ2anlwMjZodGNsM2czbjQ5anExZHVtcnAwNWNmaGZjdSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Fu3OjBQiCs3s0ZuLY3/giphy.gif" class="main-image">
+        <h1>HEHE GOTCHA! ❤️</h1>
+        <p>Verifică-ți emailul! Ți-am trimis un cadou! 😘</p>
     </div>
 
     <script>
-        // --- CONFIGURARE EMAILJS (Completează AICI) ---
-        const PUBLIC_KEY = "EvWMDMFwdQHN8Ugc5"; // Ex: "user_Xyz123..."
-        const SERVICE_ID = "service_dbbeojs";       // Ex: "service_gmail"
-        const TEMPLATE_ID = "template_xgq80ry";     // Ex: "template_abc"
+        const PUBLIC_KEY = "EvWMDMFwdQHN8Ugc5";
+        const SERVICE_ID = "service_dbbeojs";      
+        const TEMPLATE_ID = "template_xgq80ry";  
         
-        // AICI PUI EMAILUL EI/LUI (Cui vrei sa ii ajunga mailul)
         const EMAIL_DESTINATAR = "alin2004andres@gmail.com"; 
-        // ----------------------------------------------
-
-        // Inițializare EmailJS
         (function(){
             emailjs.init(PUBLIC_KEY);
         })();
@@ -119,7 +114,7 @@
         const image = document.getElementById('valentineImage');
         const question = document.getElementById('question');
 
-        const stopImageSrc = "https://media.giphy.com/media/11tTNkNy1SdXGg/giphy.gif"; 
+        const stopImageSrc = "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExZWVqaWtnaG1zZzdncjV6NTUzcnJ5cXdscmdka3M5b3BlM2FiYzE2diZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/OHRF8LZis06OiPDJby/giphy.gif"; 
 
         function moveButton() {
             hoverCount++;
@@ -139,14 +134,12 @@
         }
 
         function handleYesClick() {
-            // 1. Arătăm mesajul de succes imediat (ca să nu aștepte)
             document.getElementById('card').style.display = 'none';
             document.getElementById('success-message').style.display = 'block';
 
-            // 2. Trimitem emailul în fundal
             var templateParams = {
-                to_email: EMAIL_DESTINATAR, // Mailul setat mai sus
-                message: "A zis DA!" // Mesaj tehnic (poți ignora, contează ce ai pus în Template pe site)
+                to_email: EMAIL_DESTINATAR,
+                message: "A zis DA!"
             };
 
             emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams)
